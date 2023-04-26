@@ -2,10 +2,13 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { sequelize } from "./db.js";
+import * as dotenv from "dotenv";
 
 const PORT = process.env.PORT || 7000;
 
 const app = express();
+
+dotenv.config();
 
 app.use(cors());
 app.use(
