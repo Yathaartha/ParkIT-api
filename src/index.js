@@ -1,8 +1,10 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
-import { sequelize } from "./db.js";
+import { sequelize } from "./database/db.js";
 import * as dotenv from "dotenv";
+import { spawn, spawnSync } from "child_process";
+import { PythonShell } from "python-shell";
 
 const PORT = process.env.PORT || 7000;
 
@@ -34,4 +36,20 @@ app.get("/db", (req, res) => {
   } catch (error) {
     console.log(error);
   }
+});
+
+let myPythonScript = "";
+const largeDataSet = [];
+
+app.get("/parking-slots", (req, res) => {
+  const python = spawn("py", ["./python/Smart-Parking.py"]);
+  python.stdout.on("data", (data) => {
+    largeDataSet.push(data);
+  });
+
+  python.on("close", (code) => {
+    console.log(`child process close all stdio with code ${code}`);
+    // send data to browser
+    res.send(largeDataSet.join(""));
+  });
 });
