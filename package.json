@@ -5,9 +5,12 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "migrate": "npx sequelize-cli db:migrate",
+    "seed": "npx sequelize-cli db:seed:all"
   },
   "dependencies": {
+    "babel-register": "^6.26.0",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.1",
     "brainjs": "^0.7.4",
@@ -28,7 +31,9 @@
     "pg": "^8.10.0",
     "pg-hstore": "^2.3.4",
     "phone": "^3.1.33",
+    "python-shell": "^5.0.0",
     "sequelize": "^6.31.0",
+    "sequelize-cli": "^6.6.0",
     "socket.io": "^4.6.0"
   },
   "author": "",
