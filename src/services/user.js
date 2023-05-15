@@ -1,12 +1,14 @@
-import { User } from "../models/user/User";
+import { User } from "../models/user/index.js";
 
-export const getUser = async (username, password) => {
+const getUser = async (username, password) => {
   const user = await User.findOne({
     where: {
-      username: username,
-      password: password,
+      username,
+      password,
     },
   });
 
   return user;
 };
+
+export { getUser };

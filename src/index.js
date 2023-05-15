@@ -3,8 +3,8 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import { sequelize } from "./database/db.js";
 import * as dotenv from "dotenv";
-import { spawn, spawnSync } from "child_process";
-import { PythonShell } from "python-shell";
+import { spawn } from "child_process";
+import authRoutes from "./routes/auth.js";
 
 const PORT = process.env.PORT || 7000;
 
@@ -19,6 +19,8 @@ app.use(
   })
 );
 app.use(bodyParser.json());
+
+app.use("/admin", authRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
