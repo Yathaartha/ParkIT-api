@@ -1,6 +1,4 @@
-const { spawn } = require("child_process");
-
-module.exports = {
+odule.exports = {
   async up(queryInterface, Sequelize) {
     queryInterface.bulkInsert("ParkingSlots", [
       {

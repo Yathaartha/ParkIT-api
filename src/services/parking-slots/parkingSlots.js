@@ -17,7 +17,7 @@ export const getAllParkingSlots = async (req, res) => {
   let responseData = "";
   const python = spawn("py", [
     "./python/Smart-Parking.py",
-    "./python/EmptySlots.jpg",
+    "./python/EmptySlots4.png",
   ]);
   python.stdout.on("data", (data) => {
     responseData += data.toString();
@@ -72,5 +72,21 @@ export const getAllParkingSlots = async (req, res) => {
     console.log(insertData);
     res.send("ok");
     return insertData;
+  });
+};
+
+export const generatePreviousData = async (req, res) => {
+  let responseData = "";
+  const python = spawn("py", ["./python/GeneratePreviousData.py"]);
+  python.stdout.on("data", (data) => {
+    responseData += data.toString();
+  });
+
+  python.on("close", (code) => {
+    if (code !== 0) {
+      res.send("error");
+      return;
+    }
+    res.send(responseData);
   });
 };

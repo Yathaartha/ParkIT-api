@@ -10,7 +10,7 @@ export const login = async (req, res) => {
     if (response) {
       const token = jwt.sign(
         { id: response.id, username: response.username },
-        process.env.JWT_SECRET,
+        process.env.JWT_ADMIN_SECRET,
         {
           expiresIn: "2d",
           algorithm: "HS256",
