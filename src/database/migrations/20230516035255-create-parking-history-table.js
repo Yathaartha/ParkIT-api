@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    queryInterface.createTable("CurrentParking", {
+    queryInterface.createTable("ParkingHistory", {
       id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -22,10 +22,18 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
+      exitTime: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      amount: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
     });
   },
 
   async down(queryInterface, Sequelize) {
-    queryInterface.dropTable("CurrentParking");
+    queryInterface.dropTable("ParkingHistory");
   },
 };

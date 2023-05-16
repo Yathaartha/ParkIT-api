@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-import { sequelize } from "../../database/db";
+import { sequelize } from "../../database/db.js";
 
 export const CurrentParking = sequelize.define(
   "CurrentParking",
@@ -21,10 +21,6 @@ export const CurrentParking = sequelize.define(
     entryTime: {
       type: Sequelize.DATE,
       allowNull: false,
-    },
-    exitTime: {
-      type: Sequelize.DATE,
-      allowNull: true,
     },
   },
   {

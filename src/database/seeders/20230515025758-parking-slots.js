@@ -1,4 +1,4 @@
-odule.exports = {
+module.exports = {
   async up(queryInterface, Sequelize) {
     queryInterface.bulkInsert("ParkingSlots", [
       {

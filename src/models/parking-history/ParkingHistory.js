@@ -1,8 +1,8 @@
 import { Sequelize } from "sequelize";
 import { sequelize } from "../../database/db.js";
 
-export const ParkingSlots = sequelize.define(
-  "ParkingSlots",
+export const CurrentParking = sequelize.define(
+  "ParkingHistory",
   {
     id: {
       type: Sequelize.INTEGER,
@@ -10,24 +10,29 @@ export const ParkingSlots = sequelize.define(
       primaryKey: true,
       allowNull: false,
     },
-    laneNumber: {
+    slotId: {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
-    slotNumber: {
-      type: Sequelize.INTEGER,
+    vehicleNumber: {
+      type: Sequelize.STRING,
       allowNull: false,
     },
-    isAvailable: {
-      type: Sequelize.BOOLEAN,
+    entryTime: {
+      type: Sequelize.DATE,
       allowNull: false,
     },
-    distanceFromEntry: {
+    exitTime: {
+      type: Sequelize.DATE,
+      allowNull: false,
+    },
+    amount: {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
   },
   {
+    freezeTableName: true,
     timestamps: false,
   }
 );

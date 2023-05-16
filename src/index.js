@@ -8,6 +8,7 @@ import authRoutes from "./routes/auth.js";
 import {
   generatePreviousData,
   getAllParkingSlots,
+  getCurrentParking,
 } from "./services/parking-slots/index.js";
 
 const PORT = process.env.PORT || 7000;
@@ -49,3 +50,5 @@ let myPythonScript = "";
 app.get("/parking-slots", getAllParkingSlots);
 
 app.get("/generate-data", generatePreviousData);
+
+app.get("/current-parking", getCurrentParking);

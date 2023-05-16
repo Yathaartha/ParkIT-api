@@ -1,24 +1,45 @@
 "use strict";
-const dummyData = require("../../data/previousParkings");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    const formattedData = dummyData.map((parking) => {
-      // Convert date format
-
-      const formattedEntryTime = new Date(parking.entryTime);
-      const formattedExitTime = new Date(parking.exitTime);
-      // Return modified parking object
-      return {
-        slotId: parking.slotId,
-        vehicleNumber: parking.vehicleNumber,
-        entryTime: formattedEntryTime,
-        exitTime: formattedExitTime,
-      };
-    });
-
-    queryInterface.bulkInsert("CurrentParking", formattedData);
+    queryInterface.bulkInsert("CurrentParking", [
+      {
+        slotId: 147,
+        vehicleNumber: "R5M9M87I",
+        entryTime: "2023-05-16T04:29:49.930Z",
+      },
+      {
+        slotId: 156,
+        vehicleNumber: "FSRX0TEV",
+        entryTime: "2023-05-16T04:29:49.932Z",
+      },
+      {
+        slotId: 159,
+        vehicleNumber: "SSL02HNR",
+        entryTime: "2023-05-16T04:29:49.933Z",
+      },
+      {
+        slotId: 176,
+        vehicleNumber: "536VY8DV",
+        entryTime: "2023-05-16T04:29:49.933Z",
+      },
+      {
+        slotId: 180,
+        vehicleNumber: "1LNT8WUR",
+        entryTime: "2023-05-16T04:29:49.934Z",
+      },
+      {
+        slotId: 191,
+        vehicleNumber: "PMYRDWDI",
+        entryTime: "2023-05-16T04:29:49.934Z",
+      },
+      {
+        slotId: 201,
+        vehicleNumber: "QT6I1L6P",
+        entryTime: "2023-05-16T04:29:49.935Z",
+      },
+    ]);
   },
 
   async down(queryInterface, Sequelize) {
