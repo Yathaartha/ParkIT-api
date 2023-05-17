@@ -3,13 +3,8 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import { sequelize } from "./database/db.js";
 import * as dotenv from "dotenv";
-import { spawn } from "child_process";
 import authRoutes from "./routes/auth.js";
-import {
-  generatePreviousData,
-  getAllParkingSlots,
-  getCurrentParking,
-} from "./services/parking-slots/index.js";
+import parkRoutes from "./routes/park.js";
 
 const PORT = process.env.PORT || 7000;
 
@@ -26,6 +21,8 @@ app.use(
 app.use(bodyParser.json());
 
 app.use("/admin", authRoutes);
+
+app.use("/park", parkRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
@@ -44,11 +41,3 @@ app.get("/db", (req, res) => {
     console.log(error);
   }
 });
-
-let myPythonScript = "";
-
-app.get("/parking-slots", getAllParkingSlots);
-
-app.get("/generate-data", generatePreviousData);
-
-app.get("/current-parking", getCurrentParking);

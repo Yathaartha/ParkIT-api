@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 import { sequelize } from "../../database/db.js";
 
-export const CurrentParking = sequelize.define(
+export const ParkingHistory = sequelize.define(
   "ParkingHistory",
   {
     id: {
