@@ -2,6 +2,7 @@ import { spawn } from "child_process";
 import { generateRandomVehicleNumber } from "../services/utils/index.js";
 import { getParkingSlotId } from "../services/parking-slots/index.js";
 import { ParkingSlots } from "../models/parking-slots/index.js";
+import { getNearestParkingSlot } from "./../services/parking-slots/parkingSlots.js";
 
 export const getAllParkingSlots = async (req, res) => {
   let responseData = "";
@@ -142,5 +143,21 @@ export const getCurrentParking = async (req, res) => {
 
     res.send({ slots: insertData, availableSlots: insertData.length });
     return insertData;
+  });
+};
+
+export const findNearestParkingSlot = async (req, res) => {
+  const result = await getNearestParkingSlot();
+
+  if (!result) {
+    res.send({
+      message: "No slots available",
+    });
+    return;
+  }
+
+  res.send({
+    message: "Slot found",
+    slot: result,
   });
 };
