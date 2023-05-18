@@ -1,9 +1,10 @@
 "use strict";
-const dummyData = require("../../data/previousParkings.js");
+const dummyData = require("../../data/previousParkings.json");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
+    // let data = JSON.parse(dummyData);
     const formattedData = dummyData.map((parking) => {
       // Convert date format
 

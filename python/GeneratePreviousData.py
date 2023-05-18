@@ -1,4 +1,5 @@
 import random
+import sys
 from datetime import datetime, timedelta
 
 start_date = datetime.now() - timedelta(days=30)  # Start date for the data generation
@@ -13,7 +14,7 @@ for i in range(30):  # Generate data for 30 days
     for _ in range(num_records):
         entry_time = start_date + timedelta(hours=random.randint(8, 18), minutes=random.randint(0, 59))
         exit_time = entry_time + timedelta(hours=random.randint(1, 6), minutes=random.randint(0, 59))
-        slot_id = random.randint(137, 204)
+        slot_id = random.randint(395, 462)
         vehicle_number = ''.join(random.choices('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', k=8))
 
         # Create a dictionary representing a single record

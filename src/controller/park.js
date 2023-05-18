@@ -3,12 +3,13 @@ import { generateRandomVehicleNumber } from "../services/utils/index.js";
 import { getParkingSlotId } from "../services/parking-slots/index.js";
 import { ParkingSlots } from "../models/parking-slots/index.js";
 import { getNearestParkingSlot } from "./../services/parking-slots/parkingSlots.js";
+import fs from "fs";
 
 export const getAllParkingSlots = async (req, res) => {
   let responseData = "";
   const python = spawn("py", [
     "./python/Smart-Parking.py",
-    "./python/EmptySlots4.png",
+    "./python/EmptySlots.jpg",
   ]);
   python.stdout.on("data", (data) => {
     responseData += data.toString();
@@ -67,8 +68,13 @@ export const getAllParkingSlots = async (req, res) => {
 };
 
 export const generatePreviousData = async (req, res) => {
+  const { startIndex, endIndex } = req.body;
   let responseData = "";
-  const python = spawn("py", ["./python/GeneratePreviousData.py"]);
+  const python = spawn("py", [
+    "./python/GeneratePreviousData.py",
+    startIndex,
+    endIndex,
+  ]);
   python.stdout.on("data", (data) => {
     responseData += data.toString();
   });
@@ -78,6 +84,9 @@ export const generatePreviousData = async (req, res) => {
       res.send("error");
       return;
     }
+    let dataDump = fs.createWriteStream("./src/data/previousParkings.json");
+    dataDump.write(responseData);
+    dataDump.end();
     res.send(responseData);
   });
 };
@@ -86,7 +95,7 @@ export const getCurrentParking = async (req, res) => {
   let responseData = "";
   const python = spawn("py", [
     "./python/Parked-Slots.py",
-    "./python/EmptySlots4.png",
+    "./python/NonEmptySlots.jpg",
   ]);
   python.stdout.on("data", (data) => {
     responseData += data.toString();
@@ -137,11 +146,12 @@ export const getCurrentParking = async (req, res) => {
           where: {
             id: data.slotId,
           },
+          logging: false,
         }
       );
     });
 
-    res.send({ slots: insertData, availableSlots: insertData.length });
+    res.send({ slots: insertData, availableSlots: 68 - insertData.length });
     return insertData;
   });
 };

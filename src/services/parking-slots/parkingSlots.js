@@ -64,12 +64,12 @@ export const getParkingDetails = async (req, res) => {
 };
 
 export const bookParkingSlot = async (req, res) => {
-  const { vehicleNumber } = req.body;
+  const { vehicleNumber, estimatedHours } = req.body;
 
-  const nearestSlot = getNearestParkingSlot();
+  const nearestSlot = await getNearestParkingSlot();
 
   if (!nearestSlot) {
-    res.send({
+    res.status(401).json({
       message: "No slots available",
     });
     return;
@@ -86,19 +86,21 @@ export const bookParkingSlot = async (req, res) => {
     }
   );
 
+  const estimatedExitTime = new Date();
+  estimatedExitTime.setHours(estimatedExitTime.getHours() + estimatedHours);
+
   await CurrentParking.create({
     slotId: nearestSlot.id,
     vehicleNumber,
     entryTime: new Date(),
+    estimatedExit: estimatedExitTime,
   });
 
   res.send({
-    message: "ok",
-    data: {
-      slotId: nearestSlot.id,
-      vehicleNumber,
-      entryTime: new Date(),
-    },
+    slotId: nearestSlot.id,
+    vehicleNumber,
+    entryTime: new Date(),
+    estimatedExitTime,
   });
 };
 

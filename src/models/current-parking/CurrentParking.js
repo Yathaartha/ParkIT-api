@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize";
 import { sequelize } from "../../database/db.js";
+import { ParkingSlots } from "../parking-slots/ParkingSlots.js";
 
 export const CurrentParking = sequelize.define(
   "CurrentParking",
@@ -22,9 +23,17 @@ export const CurrentParking = sequelize.define(
       type: Sequelize.DATE,
       allowNull: false,
     },
+    estimatedExit: {
+      type: Sequelize.DATE,
+      allowNull: true,
+    },
   },
   {
     freezeTableName: true,
     timestamps: false,
   }
 );
+
+CurrentParking.belongsTo(ParkingSlots, {
+  foreignKey: "slotId",
+});

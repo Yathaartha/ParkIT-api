@@ -59,7 +59,7 @@ if img3 is not None:
         count = np.count_nonzero(crop)
         if count < 35:
             slot = (start[0] - 56) / 29
-            distance = math.sqrt((start[0] - entry_point[0])**2 + (start[1] - entry_point[1])**2)
+            distance = abs(start[0] - entry_point[0]) + abs(start[1] - entry_point[1])
             lane1.append({"slot": int(slot + 1), "distance": distance})
         increment = (start[0] + 29, start[1])
         start = increment
@@ -73,7 +73,7 @@ if img3 is not None:
         count = np.count_nonzero(crop)
         if count < 35:
             slot = (start[0] - 56) / 29
-            distance = math.sqrt((start[0] - entry_point[0])**2 + (start[1] - entry_point[1])**2)
+            distance = abs(start[0] - entry_point[0]) + abs((start[1]+60) - entry_point[1])
             lane2.append({"slot": int(slot + 1), "distance": distance})
         increment = (start[0] + 29, start[1])
         start = increment
@@ -86,7 +86,7 @@ if img3 is not None:
         count = np.count_nonzero(crop)
         if count < 35:
             slot = (start[0] - 52) / 30
-            distance = math.sqrt((start[0] - entry_point[0])**2 + (start[1] - entry_point[1])**2)
+            distance = abs(start[0] - entry_point[0]) + abs(start[1] - entry_point[1])
             lane3.append({"slot": int(slot + 1), "distance": distance})
         increment = (start[0] + 30, start[1])
         start = increment
@@ -100,7 +100,7 @@ if img3 is not None:
         count = np.count_nonzero(crop)
         if count < 35:
             slot = (start[0] - 52) / 30
-            distance = math.sqrt((start[0] - entry_point[0])**2 + (start[1] - entry_point[1])**2)
+            distance = abs(start[0] - entry_point[0]) + abs((start[1]+60) - entry_point[1])
             lane4.append({"slot": int(slot + 1), "distance": distance})
         increment = (start[0] + 30, start[1])
         start = increment
