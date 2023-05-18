@@ -27,7 +27,7 @@ export const ParkingHistory = sequelize.define(
       allowNull: false,
     },
     amount: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.FLOAT,
       allowNull: false,
     },
   },

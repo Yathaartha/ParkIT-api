@@ -4,6 +4,8 @@ import { getParkingSlotId } from "../services/parking-slots/index.js";
 import { ParkingSlots } from "../models/parking-slots/index.js";
 import { getNearestParkingSlot } from "./../services/parking-slots/parkingSlots.js";
 import fs from "fs";
+import { ParkingHistory } from "../models/parking-history/ParkingHistory.js";
+import { CurrentParking } from "../models/current-parking/CurrentParking.js";
 
 export const getAllParkingSlots = async (req, res) => {
   let responseData = "";
@@ -66,6 +68,14 @@ export const getAllParkingSlots = async (req, res) => {
     return insertData;
   });
 };
+
+// export const getCurrentParkingSlots = async (req, res) => {
+//   const parkingSlots = await ParkingSlots.findAll({
+//     logging: false,
+//   });
+
+//   res.send()
+// };
 
 export const generatePreviousData = async (req, res) => {
   const { startIndex, endIndex } = req.body;
@@ -169,5 +179,56 @@ export const findNearestParkingSlot = async (req, res) => {
   res.send({
     message: "Slot found",
     slot: result,
+  });
+};
+
+export const exitParking = async (req, res) => {
+  const { vehicleNumber } = req.body;
+
+  const parkingSlot = await CurrentParking.findOne({
+    where: {
+      vehicleNumber,
+    },
+  });
+
+  if (!parkingSlot) {
+    res.send({
+      message: "No vehicle found",
+    });
+    return;
+  }
+
+  await ParkingSlots.update(
+    {
+      isAvailable: true,
+    },
+    {
+      where: {
+        id: parkingSlot.slotId,
+      },
+    }
+  );
+
+  const currentTime = new Date();
+  const totalHours = currentTime.getHours() - parkingSlot.entryTime.getHours();
+
+  const parkingDetails = await ParkingHistory.create(
+    {
+      slotId: parkingSlot.id,
+      vehicleNumber: parkingSlot.vehicleNumber,
+      entryTime: parkingSlot.entryTime,
+      exitTime: new Date(),
+      amount: Math.max(0.5 * totalHours, 0.25),
+    },
+    {
+      returning: true,
+    }
+  );
+
+  parkingSlot.destroy();
+
+  res.send({
+    message: "Vehicle exited",
+    parkingDetails,
   });
 };

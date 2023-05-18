@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  exitParking,
   findNearestParkingSlot,
   generatePreviousData,
   getAllParkingSlots,
@@ -18,5 +19,6 @@ router.get("/current-parking", getCurrentParking);
 router.get("/nearest-slot", findNearestParkingSlot);
 
 router.post("/book", bookParkingSlot);
+router.post("/exit", exitParking);
 
 export default router;
