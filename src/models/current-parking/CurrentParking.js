@@ -36,4 +36,6 @@ export const CurrentParking = sequelize.define(
 
 CurrentParking.belongsTo(ParkingSlots, {
   foreignKey: "slotId",
+  targetKey: "id",
+  as: "parkingSlot",
 });

@@ -1,5 +1,6 @@
 import { Sequelize } from "sequelize";
 import { sequelize } from "../../database/db.js";
+import { ParkingSlots } from "../parking-slots/ParkingSlots.js";
 
 export const ParkingHistory = sequelize.define(
   "ParkingHistory",
@@ -36,3 +37,9 @@ export const ParkingHistory = sequelize.define(
     timestamps: false,
   }
 );
+
+ParkingHistory.belongsTo(ParkingSlots, {
+  foreignKey: "slotId",
+  targetKey: "id",
+  as: "parkingSlot",
+});

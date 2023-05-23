@@ -74,7 +74,6 @@ export const bookParkingSlot = async (req, res) => {
     });
     return;
   }
-
   await ParkingSlots.update(
     {
       isAvailable: false,
@@ -86,8 +85,11 @@ export const bookParkingSlot = async (req, res) => {
     }
   );
 
+  // add the estimated hours to current time taking into account the date as well
   const estimatedExitTime = new Date();
   estimatedExitTime.setHours(estimatedExitTime.getHours() + estimatedHours);
+
+  console.log(estimatedExitTime, estimatedHours);
 
   await CurrentParking.create({
     slotId: nearestSlot.id,
@@ -96,12 +98,28 @@ export const bookParkingSlot = async (req, res) => {
     estimatedExit: estimatedExitTime,
   });
 
+  const { laneNumber, slotNumber } = await getLaneAndSlotNumber(nearestSlot.id);
+
   res.send({
     slotId: nearestSlot.id,
+    laneNumber: laneNumber,
+    slotNumber: slotNumber,
     vehicleNumber,
     entryTime: new Date(),
     estimatedExitTime,
   });
+};
+
+export const getLaneAndSlotNumber = (slotId) => {
+  const slot = ParkingSlots.findOne({
+    attributes: ["laneNumber", "slotNumber"],
+    where: {
+      id: slotId,
+    },
+    logging: false,
+  });
+
+  return slot;
 };
 
 export const exitParkingSlot = async (req, res) => {

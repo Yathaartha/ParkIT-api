@@ -14,13 +14,14 @@ module.exports = {
         formattedExitTime - formattedEntryTime
       );
       const hours = diffInMilliseconds / (1000 * 60 * 60);
+      const amount = parseFloat((hours * 0.5).toFixed(2));
       // Return modified parking object
       return {
         slotId: parking.slotId,
         vehicleNumber: parking.vehicleNumber,
         entryTime: formattedEntryTime.toISOString(),
         exitTime: formattedExitTime.toISOString(),
-        amount: 0.5 * hours,
+        amount: amount,
       };
     });
 

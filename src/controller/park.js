@@ -210,7 +210,8 @@ export const exitParking = async (req, res) => {
   );
 
   const currentTime = new Date();
-  const totalHours = currentTime.getHours() - parkingSlot.entryTime.getHours();
+  // get the hour difference between current date and the date of entry
+  const totalHours = Math.abs(currentTime - parkingSlot.entryTime) / 36e5;
 
   const parkingDetails = await ParkingHistory.create(
     {
@@ -218,7 +219,7 @@ export const exitParking = async (req, res) => {
       vehicleNumber: parkingSlot.vehicleNumber,
       entryTime: parkingSlot.entryTime,
       exitTime: new Date(),
-      amount: Math.max(0.5 * totalHours, 0.25),
+      amount: parseFloat(Math.max(0.5 * totalHours, 0.25).toFixed(2)),
     },
     {
       returning: true,

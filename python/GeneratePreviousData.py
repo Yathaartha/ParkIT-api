@@ -12,7 +12,7 @@ for i in range(30):  # Generate data for 30 days
     num_records = random.randint(50, 100)
 
     for _ in range(num_records):
-        entry_time = start_date + timedelta(hours=random.randint(8, 18), minutes=random.randint(0, 59))
+        entry_time = start_date + timedelta(hours=random.randint(1, 12), minutes=random.randint(0, 59))
         exit_time = entry_time + timedelta(hours=random.randint(1, 6), minutes=random.randint(0, 59))
         slot_id = random.randint(395, 462)
         vehicle_number = ''.join(random.choices('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789', k=8))
