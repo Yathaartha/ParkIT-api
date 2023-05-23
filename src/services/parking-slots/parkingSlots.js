@@ -1,6 +1,7 @@
 import { ParkingSlots } from "../../models/parking-slots/index.js";
 import { CurrentParking } from "../../models/current-parking/CurrentParking.js";
 import { ParkingHistory } from "../../models/parking-history/ParkingHistory.js";
+import moment from "moment";
 
 export const setAvailability = async (id, availability) => {
   const parkingSlot = await ParkingSlots.findOne({
@@ -86,16 +87,16 @@ export const bookParkingSlot = async (req, res) => {
   );
 
   // add the estimated hours to current time taking into account the date as well
-  const estimatedExitTime = new Date();
-  estimatedExitTime.setHours(estimatedExitTime.getHours() + estimatedHours);
+  const estimatedExitTime = moment();
+  estimatedExitTime.add(estimatedHours, "hours");
 
   console.log(estimatedExitTime, estimatedHours);
 
   await CurrentParking.create({
     slotId: nearestSlot.id,
     vehicleNumber,
-    entryTime: new Date(),
-    estimatedExit: estimatedExitTime,
+    entryTime: moment().toISOString(),
+    estimatedExit: estimatedExitTime.toISOString(),
   });
 
   const { laneNumber, slotNumber } = await getLaneAndSlotNumber(nearestSlot.id);
@@ -139,11 +140,11 @@ export const exitParkingSlot = async (req, res) => {
     return;
   }
 
-  const entryTime = currentParking.dataValues.entryTime;
-  const exitTime = new Date();
+  const entryTime = moment(currentParking.dataValues.entryTime);
+  const exitTime = moment();
 
-  const timeDiff = Math.abs(exitTime - entryTime);
-  const hours = Math.floor(timeDiff / 1000 / 60 / 60);
+  const timeDiff = exitTime.diff(entryTime);
+  const hours = moment.duration(timeDiff).asHours();
 
   const amount = process.env.PARKING_RATE * hours;
 
@@ -172,8 +173,8 @@ export const exitParkingSlot = async (req, res) => {
     data: {
       slotId,
       vehicleNumber,
-      entryTime,
-      exitTime,
+      entryTime: entryTime.toISOString(),
+      exitTime: exitTime.toISOString(),
       amount,
     },
   });

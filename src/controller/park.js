@@ -215,7 +215,7 @@ export const exitParking = async (req, res) => {
 
   const parkingDetails = await ParkingHistory.create(
     {
-      slotId: parkingSlot.id,
+      slotId: parkingSlot.slotId,
       vehicleNumber: parkingSlot.vehicleNumber,
       entryTime: parkingSlot.entryTime,
       exitTime: new Date(),
