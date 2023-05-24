@@ -2,7 +2,10 @@ import { spawn } from "child_process";
 import { generateRandomVehicleNumber } from "../services/utils/index.js";
 import { getParkingSlotId } from "../services/parking-slots/index.js";
 import { ParkingSlots } from "../models/parking-slots/index.js";
-import { getNearestParkingSlot } from "./../services/parking-slots/parkingSlots.js";
+import {
+  getLaneAndSlotNumber,
+  getNearestParkingSlot,
+} from "./../services/parking-slots/parkingSlots.js";
 import fs from "fs";
 import { ParkingHistory } from "../models/parking-history/ParkingHistory.js";
 import { CurrentParking } from "../models/current-parking/CurrentParking.js";
@@ -68,14 +71,6 @@ export const getAllParkingSlots = async (req, res) => {
     return insertData;
   });
 };
-
-// export const getCurrentParkingSlots = async (req, res) => {
-//   const parkingSlots = await ParkingSlots.findAll({
-//     logging: false,
-//   });
-
-//   res.send()
-// };
 
 export const generatePreviousData = async (req, res) => {
   const { startIndex, endIndex } = req.body;
@@ -231,5 +226,38 @@ export const exitParking = async (req, res) => {
   res.send({
     message: "Vehicle exited",
     parkingDetails,
+  });
+};
+
+export const searchParking = async (req, res) => {
+  const { vehicleNumber } = req.body;
+
+  const parkingSlot = await CurrentParking.findOne({
+    where: {
+      vehicleNumber,
+    },
+  });
+
+  if (!parkingSlot) {
+    res.send({
+      message: "No vehicle found",
+    });
+    return;
+  }
+
+  const { laneNumber, slotNumber } = await getLaneAndSlotNumber(
+    parkingSlot.slotId
+  );
+
+  res.send({
+    message: "Vehicle found",
+    parkingSlot: {
+      slotId: parkingSlot.slotId,
+      laneNumber,
+      slotNumber,
+      vehicleNumber: parkingSlot.vehicleNumber,
+      entryTime: parkingSlot.entryTime,
+      estimatedExitTime: parkingSlot.estimatedExit,
+    },
   });
 };
