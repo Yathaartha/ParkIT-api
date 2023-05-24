@@ -27,6 +27,11 @@ export const CurrentParking = sequelize.define(
       type: Sequelize.DATE,
       allowNull: true,
     },
+    needCover: {
+      type: Sequelize.BOOLEAN,
+      allowNull: true,
+      defaultValue: false,
+    },
   },
   {
     freezeTableName: true,

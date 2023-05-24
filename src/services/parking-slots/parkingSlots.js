@@ -65,7 +65,7 @@ export const getParkingDetails = async (req, res) => {
 };
 
 export const bookParkingSlot = async (req, res) => {
-  const { vehicleNumber, estimatedHours } = req.body;
+  const { vehicleNumber, estimatedHours, needCover } = req.body;
 
   const nearestSlot = await getNearestParkingSlot();
 
@@ -97,6 +97,7 @@ export const bookParkingSlot = async (req, res) => {
     vehicleNumber,
     entryTime: moment().toISOString(),
     estimatedExit: estimatedExitTime.toISOString(),
+    needCover,
   });
 
   const { laneNumber, slotNumber } = await getLaneAndSlotNumber(nearestSlot.id);
