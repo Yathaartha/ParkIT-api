@@ -156,6 +156,10 @@ export const getCurrentParking = async (req, res) => {
       );
     });
 
+    let dataDump = fs.createWriteStream("./src/data/currentParking.json");
+    dataDump.write(JSON.stringify(insertData));
+    dataDump.end();
+
     res.send({ slots: insertData, availableSlots: 68 - insertData.length });
     return insertData;
   });

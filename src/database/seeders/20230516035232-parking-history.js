@@ -1,5 +1,5 @@
 "use strict";
-const dummyData = require("../../data/previousParkings.json");
+const dummyData = require("../../data/currentParking.json");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {

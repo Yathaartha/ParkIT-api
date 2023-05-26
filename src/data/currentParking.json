@@ -1,0 +1,170 @@
+[
+  {
+    "slotId": 395,
+    "laneNumber": 1,
+    "slotNumber": 1,
+    "vehicleNumber": "Y91HMO99",
+    "entryTime": "2023-05-26T04:43:50.499Z"
+  },
+  {
+    "slotId": 396,
+    "laneNumber": 1,
+    "slotNumber": 2,
+    "vehicleNumber": "XZ0OVVC3",
+    "entryTime": "2023-05-26T04:43:50.501Z"
+  },
+  {
+    "slotId": 405,
+    "laneNumber": 1,
+    "slotNumber": 11,
+    "vehicleNumber": "PV8J9AOE",
+    "entryTime": "2023-05-26T04:43:50.502Z"
+  },
+  {
+    "slotId": 422,
+    "laneNumber": 2,
+    "slotNumber": 11,
+    "vehicleNumber": "CJ7JJWVA",
+    "entryTime": "2023-05-26T04:43:50.503Z"
+  },
+  {
+    "slotId": 414,
+    "laneNumber": 2,
+    "slotNumber": 3,
+    "vehicleNumber": "HSVJ6V4X",
+    "entryTime": "2023-05-26T04:43:50.504Z"
+  },
+  {
+    "slotId": 423,
+    "laneNumber": 2,
+    "slotNumber": 12,
+    "vehicleNumber": "HYE6RZRY",
+    "entryTime": "2023-05-26T04:43:50.505Z"
+  },
+  {
+    "slotId": 425,
+    "laneNumber": 2,
+    "slotNumber": 14,
+    "vehicleNumber": "MUAK5SI4",
+    "entryTime": "2023-05-26T04:43:50.506Z"
+  },
+  {
+    "slotId": 426,
+    "laneNumber": 2,
+    "slotNumber": 15,
+    "vehicleNumber": "QQWQLSBK",
+    "entryTime": "2023-05-26T04:43:50.507Z"
+  },
+  {
+    "slotId": 428,
+    "laneNumber": 2,
+    "slotNumber": 17,
+    "vehicleNumber": "1HHLZ4KE",
+    "entryTime": "2023-05-26T04:43:50.508Z"
+  },
+  {
+    "slotId": 429,
+    "laneNumber": 3,
+    "slotNumber": 1,
+    "vehicleNumber": "MBG8LVFX",
+    "entryTime": "2023-05-26T04:43:50.510Z"
+  },
+  {
+    "slotId": 436,
+    "laneNumber": 3,
+    "slotNumber": 8,
+    "vehicleNumber": "W24WMNUG",
+    "entryTime": "2023-05-26T04:43:50.510Z"
+  },
+  {
+    "slotId": 439,
+    "laneNumber": 3,
+    "slotNumber": 11,
+    "vehicleNumber": "PU8DAWWS",
+    "entryTime": "2023-05-26T04:43:50.511Z"
+  },
+  {
+    "slotId": 442,
+    "laneNumber": 3,
+    "slotNumber": 14,
+    "vehicleNumber": "H4W2BFHT",
+    "entryTime": "2023-05-26T04:43:50.512Z"
+  },
+  {
+    "slotId": 443,
+    "laneNumber": 3,
+    "slotNumber": 15,
+    "vehicleNumber": "T4V748EY",
+    "entryTime": "2023-05-26T04:43:50.513Z"
+  },
+  {
+    "slotId": 445,
+    "laneNumber": 3,
+    "slotNumber": 17,
+    "vehicleNumber": "XHKDWZGI",
+    "entryTime": "2023-05-26T04:43:50.513Z"
+  },
+  {
+    "slotId": 447,
+    "laneNumber": 4,
+    "slotNumber": 2,
+    "vehicleNumber": "9SJF6INT",
+    "entryTime": "2023-05-26T04:43:50.514Z"
+  },
+  {
+    "slotId": 453,
+    "laneNumber": 4,
+    "slotNumber": 8,
+    "vehicleNumber": "U4C25B5X",
+    "entryTime": "2023-05-26T04:43:50.515Z"
+  },
+  {
+    "slotId": 455,
+    "laneNumber": 4,
+    "slotNumber": 10,
+    "vehicleNumber": "Q3F0I1ZQ",
+    "entryTime": "2023-05-26T04:43:50.515Z"
+  },
+  {
+    "slotId": 456,
+    "laneNumber": 4,
+    "slotNumber": 11,
+    "vehicleNumber": "X7Y0J4BB",
+    "entryTime": "2023-05-26T04:43:50.516Z"
+  },
+  {
+    "slotId": 458,
+    "laneNumber": 4,
+    "slotNumber": 13,
+    "vehicleNumber": "HYDY9HB9",
+    "entryTime": "2023-05-26T04:43:50.517Z"
+  },
+  {
+    "slotId": 459,
+    "laneNumber": 4,
+    "slotNumber": 14,
+    "vehicleNumber": "IELOD8SV",
+    "entryTime": "2023-05-26T04:43:50.517Z"
+  },
+  {
+    "slotId": 460,
+    "laneNumber": 4,
+    "slotNumber": 15,
+    "vehicleNumber": "7MNNC6CU",
+    "entryTime": "2023-05-26T04:43:50.517Z"
+  },
+  {
+    "slotId": 461,
+    "laneNumber": 4,
+    "slotNumber": 16,
+    "vehicleNumber": "N45PBGY3",
+    "entryTime": "2023-05-26T04:43:50.518Z"
+  },
+  {
+    "slotId": 462,
+    "laneNumber": 4,
+    "slotNumber": 17,
+    "vehicleNumber": "6GHWDE1L",
+    "entryTime": "2023-05-26T04:43:50.519Z"
+  }
+]
